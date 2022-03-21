@@ -36,7 +36,10 @@ final class ZammadClient
             $baseUri,
             [
                 'headers' => [
-                    'Authorization' => TrimmedNonEmptyString::fromString($token)->toString(),
+                    'Authorization' => \Safe\sprintf(
+                        'Token %s',
+                        TrimmedNonEmptyString::fromString($token)->toString(),
+                    ),
                 ],
             ]
         );
