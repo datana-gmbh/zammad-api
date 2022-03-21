@@ -22,6 +22,11 @@ final class NullTicketsApi implements TicketsApiInterface
         return true;
     }
 
+    public function update(int $id, array $data): bool
+    {
+        return true;
+    }
+
     /**
      * {@inheritDoc}
      */

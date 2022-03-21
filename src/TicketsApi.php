@@ -17,6 +17,7 @@ use Datana\Zammad\Api\Domain\Value\Ticket;
 use OskarStark\Value\TrimmedNonEmptyString;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Webmozart\Assert\Assert;
 
 final class TicketsApi implements TicketsApiInterface
 {
@@ -74,6 +75,34 @@ final class TicketsApi implements TicketsApiInterface
                 '/api/v1/tickets',
                 [
                     'json' => $ticket->toArray(),
+                ],
+            );
+
+            $this->logger->debug('Response', $response->toArray(false));
+
+            if (!\in_array($response->getStatusCode(), [200, 201], true)) {
+                return false;
+            }
+
+            return true;
+        } catch (\Throwable $e) {
+            $this->logger->error($e->getMessage());
+
+            throw $e;
+        }
+    }
+
+    public function update(int $id, array $data): bool
+    {
+        Assert::greaterThanEq($id, 0);
+        Assert::notEmpty($data);
+
+        try {
+            $response = $this->client->request(
+                Request::METHOD_PUT,
+                \Safe\sprintf('/api/v1/tickets/%s', $id),
+                [
+                    'json' => $data,
                 ],
             );
 

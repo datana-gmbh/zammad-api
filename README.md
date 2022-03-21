@@ -45,12 +45,24 @@ $ticket = new Ticket(/* ... */);
 $responseAsBool = $ticketsApi->create($ticket);
 ```
 
-### Search for tickets
+### Update a ticket
 
 ```php
 use Datana\Zammad\Api\TicketsApi;
 use Datana\Zammad\Api\ZammadClient;
 
+$client = new ZammadClient(/* ... */);
+
+$ticketsApi = new TicketsApi($client);
+
+$responseAsBool = $ticketsApi->update(1, ['email' => 'foo@bar.de']);
+```
+
+### Search for tickets
+
+```php
+use Datana\Zammad\Api\TicketsApi;
+use Datana\Zammad\Api\ZammadClient;
 $client = new ZammadClient(/* ... */);
 
 $responseAsArray = $ticketsApi->search('foo');

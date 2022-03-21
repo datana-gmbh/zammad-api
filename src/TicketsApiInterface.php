@@ -19,6 +19,8 @@ interface TicketsApiInterface
 {
     public function create(Ticket $ticket): bool;
 
+    public function update(int $id, array $data): bool;
+
     /**
      * @param string   $searchterm     the searchterm to search for
      * @param int|null $page           page of objects, optional, if given, $objects_per_page must also be given
