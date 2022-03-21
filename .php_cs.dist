@@ -1,7 +1,7 @@
 <?php
 
 $header = <<<'HEADER'
-This file is part of Datapool-Api.
+This file is part of Zammad-Api.
 
 (c) Datana GmbH <info@datana.rocks>
 

@@ -1,4 +1,4 @@
-# datapool-api
+# zammad-api
 
 | Branch    | PHP                                         | Code Coverage                                        |
 |-----------|---------------------------------------------|------------------------------------------------------|
@@ -9,18 +9,18 @@
 ### Installation
 
 ```bash
-composer require datana-gmbh/datapool-api
+composer require datana-gmbh/zammad-api
 ```
 
 ### Setup
 ```php
-use Datana\Datapool\Api\DatapoolClient;
+use Datana\Zammad\Api\ZammadClient;
 
-$baseUri = 'https://api.datapool...';
+$baseUri = 'https://api.zammad...';
 $username = '...';
 $password = '...';
 
-$client = new DatapoolClient($baseUri, $username, $password);
+$client = new ZammadClient($baseUri, $username, $password);
 
 // you can now request any endpoint which needs authentication
 $client->request('GET', '/api/something', $options);
@@ -28,15 +28,15 @@ $client->request('GET', '/api/something', $options);
 
 ## Akten
 
-In your code you should type-hint to `Datana\Datapool\Api\AktenApiInterface`
+In your code you should type-hint to `Datana\Zammad\Api\AktenApiInterface`
 
 ### Search by string (`string`)
 
 ```php
-use Datana\Datapool\Api\AktenApi;
-use Datana\Datapool\Api\DatapoolClient;
+use Datana\Zammad\Api\AktenApi;
+use Datana\Zammad\Api\ZammadClient;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenApi = new AktenApi($client);
 $response = $aktenApi->search('MySearchTerm');
@@ -45,51 +45,51 @@ $response = $aktenApi->search('MySearchTerm');
 ### Get by Aktenzeichen (`string`)
 
 ```php
-use Datana\Datapool\Api\AktenApi;
-use Datana\Datapool\Api\DatapoolClient;
-use Datana\Datapool\Api\Domain\Value\DatapoolId;
+use Datana\Zammad\Api\AktenApi;
+use Datana\Zammad\Api\ZammadClient;
+use Datana\Zammad\Api\Domain\Value\ZammadId;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenApi = new AktenApi($client);
 $response = $aktenApi->getByAktenzeichen('1abcde-1234-5678-Mustermann');
 
 /*
- * to get the DatapoolId transform the response to array
+ * to get the ZammadId transform the response to array
  * and use the 'id' key.
  */
 $akten = $response->toArray();
-$datapoolId = DatapoolId::fromInt($akte['id']);
+$zammadId = ZammadId::fromInt($akte['id']);
 ```
 
 ### Get by Fahrzeug-Identifikationsnummer (`string`)
 
 ```php
-use Datana\Datapool\Api\AktenApi;
-use Datana\Datapool\Api\DatapoolClient;
-use Datana\Datapool\Api\Domain\Value\DatapoolId;
+use Datana\Zammad\Api\AktenApi;
+use Datana\Zammad\Api\ZammadClient;
+use Datana\Zammad\Api\Domain\Value\ZammadId;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenApi = new AktenApi($client);
 $response = $aktenApi->getByFahrzeugIdentifikationsnummer('ABC1234ABCD123456');
 
 /*
- * to get the DatapoolId transform the response to array
+ * to get the ZammadId transform the response to array
  * and use the 'id' key.
  */
 $akten = $response->toArray();
-$datapoolId = DatapoolId::fromInt($akte['id']);
+$zammadId = ZammadId::fromInt($akte['id']);
 ```
 
 ### Get one by Aktenzeichen (`string`) or get an exception
 
 ```php
-use Datana\Datapool\Api\AktenApi;
-use Datana\Datapool\Api\DatapoolClient;
-use Datana\Datapool\Api\Domain\Value\DatapoolId;
+use Datana\Zammad\Api\AktenApi;
+use Datana\Zammad\Api\ZammadClient;
+use Datana\Zammad\Api\Domain\Value\ZammadId;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenApi = new AktenApi($client);
 
@@ -103,39 +103,39 @@ $result = $aktenApi->getOneByAktenzeichen('1abcde-1234-5678-Mustermann');
  *   ]
  *
  * or use the dedicated getter methods like
- *  - getId(): DatapoolId
+ *  - getId(): ZammadId
  * etc.
  */
 ```
 
-### Get by ID (`Datana\Datapool\Api\Domain\Value\DatapoolId`)
+### Get by ID (`Datana\Zammad\Api\Domain\Value\ZammadId`)
 
 ```php
-use Datana\Datapool\Api\AktenApi;
-use Datana\Datapool\Api\DatapoolClient;
-use Datana\Datapool\Api\Domain\Value\DatapoolId;
+use Datana\Zammad\Api\AktenApi;
+use Datana\Zammad\Api\ZammadClient;
+use Datana\Zammad\Api\Domain\Value\ZammadId;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenApi = new AktenApi($client);
 
-$id = DatapoolId::fromInt(123);
+$id = ZammadId::fromInt(123);
 
 $aktenApi->getById($id);
 ```
 
-### Get KT Akten Info (`Datana\Datapool\Api\Domain\Value\DatapoolId`)
+### Get KT Akten Info (`Datana\Zammad\Api\Domain\Value\ZammadId`)
 
 ```php
-use Datana\Datapool\Api\AktenApi;
-use Datana\Datapool\Api\DatapoolClient;
-use Datana\Datapool\Api\Domain\Value\DatapoolId;
+use Datana\Zammad\Api\AktenApi;
+use Datana\Zammad\Api\ZammadClient;
+use Datana\Zammad\Api\Domain\Value\ZammadId;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenApi = new AktenApi($client);
 
-$id = DatapoolId::fromInt(123);
+$id = ZammadId::fromInt(123);
 
 // is an instance of KtAktenInfoResponse
 $result = $aktenApi->getKtAktenInfo($id);
@@ -157,18 +157,18 @@ $result = $aktenApi->getKtAktenInfo($id);
  */
 ```
 
-### Get E-Termin Info (`Datana\Datapool\Api\Domain\Value\DatapoolId`)
+### Get E-Termin Info (`Datana\Zammad\Api\Domain\Value\ZammadId`)
 
 ```php
-use Datana\Datapool\Api\AktenApi;
-use Datana\Datapool\Api\DatapoolClient;
-use Datana\Datapool\Api\Domain\Value\DatapoolId;
+use Datana\Zammad\Api\AktenApi;
+use Datana\Zammad\Api\ZammadClient;
+use Datana\Zammad\Api\Domain\Value\ZammadId;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenApi = new AktenApi($client);
 
-$id = DatapoolId::fromInt(123);
+$id = ZammadId::fromInt(123);
 
 // is an instance of ETerminResponse
 $response = $aktenApi->getETerminInfo($id);
@@ -189,30 +189,30 @@ $response = $aktenApi->getETerminInfo($id);
 ### Set value "Nutzer Mandantencockpit" (`bool`)
 
 ```php
-use Datana\Datapool\Api\AktenApi;
-use Datana\Datapool\Api\DatapoolClient;
-use Datana\Datapool\Api\Domain\Value\DatapoolId;
+use Datana\Zammad\Api\AktenApi;
+use Datana\Zammad\Api\ZammadClient;
+use Datana\Zammad\Api\Domain\Value\ZammadId;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenApi = new AktenApi($client);
 
-$id = DatapoolId::fromInt(123);
+$id = ZammadId::fromInt(123);
 
 $aktenApi->setValueNutzerMandantencockpit($id, true); // or false
 ```
 
 ## Aktenzeichen
 
-In your code you should type-hint to `Datana\Datapool\Api\AktenzeichenApiInterface`
+In your code you should type-hint to `Datana\Zammad\Api\AktenzeichenApiInterface`
 
 ### Get a new one
 
 ```php
-use Datana\Datapool\Api\AktenzeichenApi;
-use Datana\Datapool\Api\DatapoolClient;
+use Datana\Zammad\Api\AktenzeichenApi;
+use Datana\Zammad\Api\ZammadClient;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenzeichenApi = new AktenzeichenApi($client);
 $aktenzeichenApi->new(); // returns sth like "6GU5DCB"
@@ -220,15 +220,15 @@ $aktenzeichenApi->new(); // returns sth like "6GU5DCB"
 
 ## AktenEventLog
 
-In your code you should type-hint to `Datana\Datapool\Api\AktenEventLogApiInterface`
+In your code you should type-hint to `Datana\Zammad\Api\AktenEventLogApiInterface`
 
 ### Create a new log
 
 ```php
-use Datana\Datapool\Api\AktenEventLogApi;
-use Datana\Datapool\Api\DatapoolClient;
+use Datana\Zammad\Api\AktenEventLogApi;
+use Datana\Zammad\Api\ZammadClient;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $aktenEventLog = new AktenEventLogApi($client);
 $aktenEventLog->log(
@@ -242,15 +242,15 @@ $aktenEventLog->log(
 
 ## SystemEventLog
 
-In your code you should type-hint to `Datana\Datapool\Api\SystemEventLogApiInterface`
+In your code you should type-hint to `Datana\Zammad\Api\SystemEventLogApiInterface`
 
 ### Create a new log
 
 ```php
-use Datana\Datapool\Api\DatapoolClient;
-use Datana\Datapool\Api\SystemEventLogApi;
+use Datana\Zammad\Api\ZammadClient;
+use Datana\Zammad\Api\SystemEventLogApi;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $systemEventLog = new SystemEventLogApi($client);
 $systemEventLog->log(
@@ -263,19 +263,19 @@ $systemEventLog->log(
 );
 ```
 
-The API internally converts the "+2 months" to a datetime object. If this datetime is reached, Datapool will delete the log entry. Pass ``null`` to keep the log entry forever.
+The API internally converts the "+2 months" to a datetime object. If this datetime is reached, Zammad will delete the log entry. Pass ``null`` to keep the log entry forever.
 
 ## ChatProtocol
 
-In your code you should type-hint to `Datana\Datapool\Api\ChatProtocolApiInterface`
+In your code you should type-hint to `Datana\Zammad\Api\ChatProtocolApiInterface`
 
 ### Save a new chat protocol
 
 ```php
-use Datana\Datapool\Api\ChatProtoclApi;
-use Datana\Datapool\Api\DatapoolClient;
+use Datana\Zammad\Api\ChatProtoclApi;
+use Datana\Zammad\Api\ZammadClient;
 
-$client = new DatapoolClient(/* ... */);
+$client = new ZammadClient(/* ... */);
 
 $chatProtocol = new ChrtProtocolApi($client);
 $chatProtocol->log(
@@ -286,8 +286,8 @@ $chatProtocol->log(
 );
 ```
 
-[build-status-master-php]: https://github.com/datana-gmbh/datapool-api/workflows/PHP/badge.svg?branch=master
-[coverage-status-master]: https://codecov.io/gh/datana-gmbh/datapool-api/branch/master/graph/badge.svg
+[build-status-master-php]: https://github.com/datana-gmbh/zammad-api/workflows/PHP/badge.svg?branch=master
+[coverage-status-master]: https://codecov.io/gh/datana-gmbh/zammad-api/branch/master/graph/badge.svg
 
-[actions]: https://github.com/datana-gmbh/datapool-api/actions
-[codecov]: https://codecov.io/gh/datana-gmbh/datapool-api
+[actions]: https://github.com/datana-gmbh/zammad-api/actions
+[codecov]: https://codecov.io/gh/datana-gmbh/zammad-api
