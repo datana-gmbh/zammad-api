@@ -6,12 +6,27 @@ parameters:
 			path: src/NullTicketsApi.php
 
 		-
+			message: "#^Method Datana\\\\Zammad\\\\Api\\\\NullTicketsApi\\:\\:update\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/NullTicketsApi.php
+
+		-
 			message: "#^Method Datana\\\\Zammad\\\\Api\\\\TicketsApi\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/TicketsApi.php
 
 		-
+			message: "#^Method Datana\\\\Zammad\\\\Api\\\\TicketsApi\\:\\:update\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/TicketsApi.php
+
+		-
 			message: "#^Method Datana\\\\Zammad\\\\Api\\\\TicketsApiInterface\\:\\:search\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/TicketsApiInterface.php
+
+		-
+			message: "#^Method Datana\\\\Zammad\\\\Api\\\\TicketsApiInterface\\:\\:update\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/TicketsApiInterface.php
 
