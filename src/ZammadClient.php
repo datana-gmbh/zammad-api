@@ -36,8 +36,8 @@ final class ZammadClient
             $baseUri,
             [
                 'headers' => [
-                    'Authorization' =>  TrimmedNonEmptyString::fromString($token)->toString(),
-                ]
+                    'Authorization' => TrimmedNonEmptyString::fromString($token)->toString(),
+                ],
             ]
         );
         $this->logger = $logger ?? new NullLogger();
