@@ -33,7 +33,7 @@ In your code you should type-hint to `Datana\Zammad\Api\TicketsApiInterface`
 ### Create a ticket
 
 ```php
-use Datana\Zammad\Api\Domain\Value;
+use Datana\Zammad\Api\Domain\Value\Ticket;
 use Datana\Zammad\Api\TicketsApi;
 use Datana\Zammad\Api\ZammadClient;
 
@@ -42,7 +42,18 @@ $client = new ZammadClient(/* ... */);
 $ticketsApi = new TicketsApi($client);
 
 $ticket = new Ticket(/* ... */);
-$response = $ticketsApi->create($ticket);
+$responseAsBool = $ticketsApi->create($ticket);
+```
+
+### Search for tickets
+
+```php
+use Datana\Zammad\Api\TicketsApi;
+use Datana\Zammad\Api\ZammadClient;
+
+$client = new ZammadClient(/* ... */);
+
+$responseAsArray = $ticketsApi->search('foo');
 ```
 
 [build-status-master-php]: https://github.com/datana-gmbh/zammad-api/workflows/PHP/badge.svg?branch=master
