@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Datana\Zammad\Api;
 
 use Datana\Zammad\Api\Domain\Value\Ticket;
+use OskarStark\Value\TrimmedNonEmptyString;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -24,6 +25,46 @@ final class TicketsApi implements TicketsApiInterface
         private HttpClientInterface $zammadApi,
         private LoggerInterface $logger,
     ) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function search(string $searchterm, ?int $page = null, ?int $objectsPerPage = null): array
+    {
+        $this->logger->debug('Searching for tickets', ['searchterm' => $searchterm]);
+
+        $parameters = [
+            'expand' => true,
+            'query' => TrimmedNonEmptyString::fromString($searchterm)->toString(),
+        ];
+
+        if (null !== $page && null !== $objectsPerPage) {
+            $parameters['page'] = $page;
+            $parameters['per_page'] = $objectsPerPage;
+        } elseif(null === $page) {
+            throw new \InvalidArgumentException('page parameter must be set if objectsPerPage parameter is set');
+        } elseif(null === $objectsPerPage) {
+            throw new \InvalidArgumentException('objectsPerPage parameter must be set if page parameter is set');
+        }
+
+        try {
+            $response = $this->zammadApi->request(
+                Request::METHOD_POST,
+                '/api/v1/tickets/search',
+                [
+                    'query' => $parameters,
+                ],
+            );
+
+            $this->logger->debug('Response', $response->toArray(false));
+
+            return $response->toArray();
+        } catch (\Throwable $e) {
+            $this->logger->error($e->getMessage());
+
+            throw $e;
+        }
     }
 
     public function create(Ticket $ticket): bool

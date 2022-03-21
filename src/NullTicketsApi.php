@@ -21,4 +21,12 @@ final class NullTicketsApi implements TicketsApiInterface
     {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function search(string $searchterm, ?int $page = null, ?int $objectsPerPage = null): array
+    {
+        return [];
+    }
 }
