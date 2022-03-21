@@ -50,7 +50,7 @@ final class TicketsApi implements TicketsApiInterface
 
         try {
             $response = $this->zammadApi->request(
-                Request::METHOD_POST,
+                Request::METHOD_GET,
                 '/api/v1/tickets/search',
                 [
                     'query' => $parameters,
