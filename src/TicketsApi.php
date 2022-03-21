@@ -42,9 +42,9 @@ final class TicketsApi implements TicketsApiInterface
         if (null !== $page && null !== $objectsPerPage) {
             $parameters['page'] = $page;
             $parameters['per_page'] = $objectsPerPage;
-        } elseif(null === $page) {
+        } elseif (null === $page) {
             throw new \InvalidArgumentException('page parameter must be set if objectsPerPage parameter is set');
-        } elseif(null === $objectsPerPage) {
+        } elseif (null === $objectsPerPage) {
             throw new \InvalidArgumentException('objectsPerPage parameter must be set if page parameter is set');
         }
 
