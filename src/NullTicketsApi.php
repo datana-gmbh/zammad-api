@@ -17,7 +17,8 @@ use Datana\Zammad\Api\Domain\Value\Ticket;
 
 final class NullTicketsApi implements TicketsApiInterface
 {
-    public function create(Ticket $ticket): void
+    public function create(Ticket $ticket): bool
     {
+        return true;
     }
 }

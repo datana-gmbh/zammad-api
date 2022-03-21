@@ -26,16 +26,24 @@ final class TicketsApi implements TicketsApiInterface
     ) {
     }
 
-    public function create(Ticket $ticket): void
+    public function create(Ticket $ticket): bool
     {
         try {
-            $this->zammadApi->request(
+            $response = $this->zammadApi->request(
                 Request::METHOD_POST,
                 '/api/v1/tickets',
                 [
                     'json' => $ticket->toArray(),
                 ],
             );
+
+            $this->logger->debug('Response', $response->toArray(false));
+
+            if (!\in_array($response->getStatusCode(), [200, 201], true)) {
+                return false;
+            }
+
+            return true;
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
 

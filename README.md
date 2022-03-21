@@ -41,7 +41,7 @@ $client = new ZammadClient(/* ... */);
 $ticketsApi = new TicketsApi($client);
 
 $ticket = new Ticket(/* ... */);
-$ticketsApi->create($ticket);
+$response = $ticketsApi->create($ticket);
 ```
 
 [build-status-master-php]: https://github.com/datana-gmbh/zammad-api/workflows/PHP/badge.svg?branch=master
