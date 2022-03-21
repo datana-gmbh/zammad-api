@@ -17,12 +17,11 @@ use Datana\Zammad\Api\Domain\Value\Ticket;
 use OskarStark\Value\TrimmedNonEmptyString;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class TicketsApi implements TicketsApiInterface
 {
     public function __construct(
-        private HttpClientInterface $zammadApi,
+        private ZammadClient $client,
         private LoggerInterface $logger,
     ) {
     }
@@ -49,7 +48,7 @@ final class TicketsApi implements TicketsApiInterface
         }
 
         try {
-            $response = $this->zammadApi->request(
+            $response = $this->client->request(
                 Request::METHOD_GET,
                 '/api/v1/tickets/search',
                 [
@@ -70,7 +69,7 @@ final class TicketsApi implements TicketsApiInterface
     public function create(Ticket $ticket): bool
     {
         try {
-            $response = $this->zammadApi->request(
+            $response = $this->client->request(
                 Request::METHOD_POST,
                 '/api/v1/tickets',
                 [
