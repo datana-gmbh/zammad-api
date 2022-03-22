@@ -35,7 +35,7 @@ final class Ticket
         string $email,
         string $nachname,
         string $group = 'Kundensupport',
-        string $note = 'Nachricht aus dem Mandantencockpit',
+        string $note = 'Nachricht aus dem Mandantencockpit.',
         string $tags = 'Sonstige Dokumente'
     ) {
         $values = [
