@@ -38,7 +38,7 @@ final class ZammadClient
                 'headers' => [
                     'Authorization' => \Safe\sprintf(
                         'Token %s',
-                        TrimmedNonEmptyString::fromString($token)->toString(),
+                        TrimmedNonEmptyString::fromString($token, '$token must not be an empty string')->toString(),
                     ),
                 ],
             ]
