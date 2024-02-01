@@ -13,9 +13,9 @@
         "php": ">=8.0",
         "oskarstark/trimmed-non-empty-string": "^1.0",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
-        "symfony/http-client": "^5.1 || ^6.0",
-        "symfony/http-foundation": "^5.4 || ^6.0",
-        "symfony/mime": "^5.4 || ^6.0",
+        "symfony/http-client": "^5.1 || ^6.0 || ^7.0",
+        "symfony/http-foundation": "^5.4 || ^6.0 || ^7.0",
+        "symfony/mime": "^5.4 || ^6.0 || ^7.0",
         "thecodingmachine/safe": "^1.0 || ^2.0",
         "webmozart/assert": "^1.7"
     },
